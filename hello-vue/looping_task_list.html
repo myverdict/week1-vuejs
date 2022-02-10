@@ -20,7 +20,7 @@
         <!-- Note: label for and input id must match -->
         <label for="task">Please enter your to-do task: </label>
         <!-- v-model creates a 2 way binding (template to data & data to template) for the input -->
-        <input id="task" v-model="newTask">
+        <input id="task" v-model="newTask" autofocus>
 
         <!-- when the click event happens, the addTask method is triggered -->
         <button v-on:click="addTask">Add Task</button>

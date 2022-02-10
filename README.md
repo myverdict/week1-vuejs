@@ -1,5 +1,5 @@
 # week1-vuejs
-Vue.js Introduction: Vue 3, creating Vue apps, mounting &amp; Vue directives
+Vue.js Introduction: Vue 3, creating Vue apps and mounting Vue apps
 
 <h1>WEB PROGRAMMING</h1>
 

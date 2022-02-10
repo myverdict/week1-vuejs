@@ -12,5 +12,5 @@ Vue.js Introduction: Vue 3, creating Vue apps, mounting &amp; Vue directives
   <li>Vue 3 with API</li>
 </ul>
 
-<a href="https://myverdict.github.io/week8-web-programming-vuejs/index.html">
+<a href="https://myverdict.github.io/week1-vuejs/index.html">
     Click here to view live!</a>  

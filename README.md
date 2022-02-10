@@ -1,9 +1,9 @@
-# week8-web-programming-vuejs
+# week1-vuejs
 Vue.js Introduction: Vue 3, creating Vue apps, mounting &amp; Vue directives
 
 <h1>WEB PROGRAMMING</h1>
 
-<h2>Week 8 Labs: Vue.js Introduction</h2>
+<h2>Week 1 Labs: Vue.js Introduction</h2>
 
 <ul>
   <li>Vue 3 Introduction</li>

@@ -1,0 +1,43 @@
+body
+{
+    padding: 10px 30px;
+    background-color: grey;
+    color: white;
+}
+
+.error
+{
+    background-color: white;
+    padding: 5px;
+    color: red;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+}
+
+input {
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.btn {
+    background-color: lemonchiffon;
+    font-weight: bold;
+    padding: 10px;
+    width: 50px
+}
+
+/* Order button */
+#order {
+    padding: 10px;
+    background-color: lightblue;
+    font-weight: bold;
+    width: 100px;
+    border-radius: 5px;
+    font-family:'Roboto',sans-serif;
+}
+
+#order:hover {
+    background-color: lightpink;
+}

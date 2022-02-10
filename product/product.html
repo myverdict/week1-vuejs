@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+
+    <!-- Import Vue.js: Vue 3 version 3.2.30 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.30/dist/vue.global.js"></script>
+
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+
+<body>
+    <!-- this is the VIEW; also referred to as the template -->
+    <!-- Everything in this div has access to the Vue 'app' -->
+    <div id="app">
+        <!-- data from Vue displayed in template -->
+        <h1>{{ productName }}</h1>
+
+        <!-- v-bind sets the HTML attribute values using Vue data -->
+        <img v-bind:src="imageSrc" v-bind:alt="imageAlt">
+
+        <!-- data from Vue displayed in template -->
+        <p>{{ description }}</p>
+
+        <!-- 
+			Conditional rendering.
+			TODO try changing this data in Vue dev tools.
+			Data from Vue displayed in template.
+		-->
+        <p v-if="available">This product is available!</p>
+
+        <!-- 
+			Data from Vue displayed in template. 
+			Alternate way of writing the above code.
+			<p v-if="available == true">This product is available!</p> 
+		-->
+
+        <!-- Comments here are Ok! do not add any other HTML between v-if & else -->
+
+        <!-- 
+			This is the else part of the v-if above.
+			Data from Vue displayed in template.
+		-->
+        <p>Quantity Available: {{ quantityAvailable }}</p>
+
+        <!-- data from Vue displayed in template -->
+        <p>Color: {{ color }}</p>
+
+        <!-- {{ features }} will display an array -->
+        <ul>
+            <!-- data from an array in Vue displayed in template -->
+            <li v-for="feature in features">{{ feature }}</li>
+        </ul>
+
+        <div>
+            <div>
+                <!-- data from Vue displayed in template -->
+                <p>The maximum quantity you can order is {{ maxQuantity }}.</p>
+
+                <!-- 
+					Handle events in Vue with v-on directive. The v-on:click 
+					directive attaches a click event handler/listener to an 
+					element.
+					'decreaseQuantity' method from Vue displayed in template.
+				-->
+                <button v-on:click="decreaseQuantity" class="btn">-</button>
+
+                <!-- 'quantity' data & 'verifyQuantity' method of Vue -->
+                <!-- the 'number' modifier will convert the text entered to a number, if a conversion is possible -->
+                <input type="number" v-model.number="quantity" v-on:change="verifyQuantity">
+
+                <!-- 
+					Handle events in Vue with v-on directive. The v-on:click 
+					directive attaches a click event handler/listener to an 
+					element.
+					'increaseQuantity' method from Vue displayed in template.
+				-->
+                <button v-on:click="increaseQuantity" class="btn">+</button>
+            </div>
+
+            <!-- 'message' data from Vue displayed in template -->
+            <!-- paragraph shows only if there is an error to show -->
+            <p class="error" v-if="message">{{ message }}</p>
+        </div>
+
+        <!-- 
+			Handle events in Vue with v-on directive. The v-on:click directive 
+			attaches a click event handler/listener to an element.
+		-->
+        <button v-on:click="order" id="order">Order</button>
+    </div> <!-- end of #app div -->
+
+
+    <!-- this is the VIEWMODEL -->
+    <script>
+        // this creates a Vue instance
+        const app = Vue.createApp({
+            // data is the MODEL
+            // the data option for a component is a function & it returns an object.
+            // ES6 shorthand for --> data: function() {
+            data() {
+                return {
+                    productName: "Boots",
+                    description: "Waterproof boots, ideal for MN winters",
+                    available: true,        // product is available
+                    quantityAvailable: 100, // available stock
+                    features: ["Warm", "Waterpoof", "Comes in a pair", "Snow Boots"],
+                    imageSrc: "boots.png",
+                    imageAlt: "Black winter below the knee boots",
+                    quantity: 1,            // quantity customer is ordering, start at 1
+                    maxQuantity: 5,         // max quantity allowed to be ordered
+                    minQuantity: 1,         // min quantity allowed to be ordered
+                    message: "",            // for error message if max and min not followed
+                    color: 'Dark Grey'
+                }
+            },
+            methods: {
+                // function definitions
+                // a function attached to an object is called a method
+                // function, method... almost exactly the same thing
+                order() {
+                    // display an alert with the order info
+                    let orderInfo = `Thank you, you have ordered ${this.quantity} ${this.productName}`
+                    alert(orderInfo);
+                },
+                decreaseQuantity() {
+                    this.message = "";
+                    let newQuantity = this.quantity - 1;
+
+                    if (newQuantity < this.minQuantity) {
+                        // not allowed
+                        this.message = "Minimum quantity is: " + this.minQuantity;
+                    }
+                    else {
+                        this.quantity = newQuantity;
+                    }
+                },
+                increaseQuantity() {
+                    this.message = "";
+
+                    // ToDO prevent quantity being increased above this.maxQuantity
+                    let newQuantity = this.quantity + 1;
+
+                    if (newQuantity > this.maxQuantity) {
+                        // not allowed
+                        this.message = "Maximum quantity is: " + this.maxQuantity;
+                    }
+                    else {
+                        this.quantity = newQuantity;
+                    }
+                },
+                verifyQuantity() {
+                    if (this.quantity < this.minQuantity) {
+                        this.message = "Minimum quantity is: " + this.minQuantity;
+                        this.quantity = this.minQuantity;
+                    }
+                    // ToDO add code to reset the maxQuantity if too large
+                    if (this.quantity > this.maxQuantity) {
+                        this.message = "Maximum quantity is: " + this.maxQuantity;
+                        this.quantity = this.maxQuantity;
+                    }
+                }
+            }
+        })
+
+        // Mount App: To mount the app into our DOM, which effectively 
+        //            plugs our app into the #app div in the html above
+        const mountedApp = app.mount('#app')
+    </script>
+</body>
+
+</html>

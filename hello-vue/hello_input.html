@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Hello Input</title>
+
+    <!-- Import Vue.js: Vue 3 version 3.2.30 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.30/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <!-- this is the VIEW; also referred to as the template -->
+    <!-- Everything in this div has access to the Vue 'app' -->
+    <div id="app">
+        <h1>Hello input - Vue 3</h1>
+
+        <!-- Note: label for and input id must match -->
+        <label for="name">Please enter your name: </label>
+        <!-- v-model creates a 2 way binding (template to data & data to template) for the name input -->
+        <input id="name" v-model="name">
+
+        <!-- Moustache syntax: Refers to the 'name' property in the data below -->
+        <!-- this is a computed property; this para will show only if there is a name -->
+        <!-- Alternate 1 way to write the v-if -->
+        <!-- <p v-if="name.length">{{ welcomeMsg }}</p> -->
+
+        <!-- Alternate 2 way to write the v-if -->
+        <!-- <p v-if="name.length > 0">{{ welcomeMsg }}</p> -->
+
+        <!-- Alternate 3 way to write the v-if: in js an empty string is falsey value -->
+        <!-- <p v-if="name">{{ welcomeMsg }}</p> -->
+
+        <!-- this div will show only if there is a name -->
+        <div v-if="name">
+            <p>{{ welcomeMsg }}</p>
+
+            <!-- when the click event happens, the clear method is triggered -->
+            <button v-on:click="clear">Clear Input</button>
+        </div>
+        <!-- else this div will show -->
+        <div v-else>Awaiting user input ...</div>
+    </div>
+
+    
+    <!-- this is the VIEWMODEL -->
+    <script>
+        // this creates a vue instance
+        const app = Vue.createApp({
+            // data is the MODEL
+            // the data option for a component is a function & it returns an object.
+            // ES6 shorthand for --> data: function() {
+            data() {
+                return {
+                    name: '',
+                }
+            },
+            methods: {
+                // reset the name to an empty string
+                clear() {
+                    this.name = ''
+                }
+            },
+            // use computed properties where computation is involved
+            computed: {
+                // create the welcome message
+                welcomeMsg() {
+                    return "Thank you, your name is " + this.name + "."
+                }
+            }
+        })
+
+        // Mount App: To mount the app into our DOM, which effectively 
+        //            plugs our app into the #app div in the html above
+        const mountedApp = app.mount('#app')
+    </script>
+</body>
+
+</html>

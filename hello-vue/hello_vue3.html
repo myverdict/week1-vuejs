@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Vue 3</title>
+
+    <!-- Import Vue.js: Vue 3 version 3.2.30 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.30/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <!-- this is the VIEW; also referred to as the template -->
+    <!-- Everything in this div has access to the Vue 'app' -->
+    <div id="app">
+        <h1>Hello Vue 3</h1>
+
+        <!-- Moustache syntax: Refers to the 'message' property in the data below -->
+        <!-- <p>{{ message }}</p> -->
+
+        <!-- Moustache syntax: Refers to the 'message' property in the data below -->
+        <!-- javascript used directly on 'message' property -->
+        <p>{{ boldMessage }}</p>
+
+        <!-- <p>This class is ITEC {{ classCode + ' ' + className}}</p> -->
+        <!-- Instead of the above code, computation can be done in computed properties -->
+        <!-- classDetails is a computed property here -->
+        <p>{{ classDetails }}</p>
+
+        <!-- when the click event happens, the addExclamation method is triggered -->
+        <button v-on:click="addExclamation">Add !</button>
+
+        <!-- when the click event happens, the clear method is triggered -->
+        <button v-on:click="clear">Clear !</button>
+    </div>
+
+
+    <!-- this is the VIEWMODEL -->
+    <script>
+        // this creates a vue instance
+        const app = Vue.createApp({
+            // data is the MODEL
+            // the data option for a component is a function & it returns an object.
+            // ES6 shorthand for --> data: function() {
+            data() {
+                return {
+                    message: 'Welcome Web developers!',
+                    className: 'Web Client & Server Programming',
+                    classCode: 2560,
+                    numberOfExclamationPoints: 1
+                }
+            },
+            // the methods option is an object that contains the desired methods
+            methods: {
+                // this function will modify the message data
+                // ES6 shorthand for --> addExclamation: function() {
+                addExclamation() {
+                    // 'this' refers to the component instance
+                    // limit exclamation points to 10
+                    if (this.numberOfExclamationPoints < 10) {
+                        this.message += '!'
+                        this.numberOfExclamationPoints++
+                    }
+                    // alert if 10 exclamation points is exceeded
+                    else {
+                        alert('No more exclamation points!!')
+                    }
+                },
+                // reset the message & the numberOfExclamationPoints
+                clear() {
+                    // 'this' refers to the component instance
+                    this.message = 'hi!'
+                    this.numberOfExclamationPoints = 1
+                }
+            },
+            // use computed properties where computation is involved
+            computed: {
+                // 'this' refers to the component instance
+                // make the message uppercase
+                boldMessage() {
+                    return this.message.toUpperCase()
+                },
+                // 'this' refers to the component instance
+                classDetails() {
+                    return "This is ITEC " + this.classCode + " " + this.className + "."
+                }
+            }
+        })
+
+        // Mount App: To mount the app into our DOM, which effectively 
+        //            plugs our app into the #app div in the html above
+        const mountedApp = app.mount('#app')
+    </script>
+</body>
+
+</html>

@@ -27,24 +27,20 @@
         <p>{{ description }}</p>
 
         <!-- 
-			Conditional rendering.
-			TODO try changing this data in Vue dev tools.
-			Data from Vue displayed in template.
-		-->
+	    Conditional rendering: Data from Vue displayed in template.
+	    TODO try changing this data in Vue dev tools.
+	-->
         <p v-if="available">This product is available!</p>
 
         <!-- 
-			Data from Vue displayed in template. 
-			Alternate way of writing the above code.
-			<p v-if="available == true">This product is available!</p> 
-		-->
+	    Data from Vue displayed in template. 
+	    Alternate way of writing the above code.
+	    <p v-if="available == true">This product is available!</p> 
+	-->
 
         <!-- Comments here are Ok! do not add any other HTML between v-if & else -->
 
-        <!-- 
-			This is the else part of the v-if above.
-			Data from Vue displayed in template.
-		-->
+        <!-- Here will be the v-else part of the v-if above. Data from Vue displayed in template -->
         <p>Quantity Available: {{ quantityAvailable }}</p>
 
         <!-- data from Vue displayed in template -->
@@ -62,11 +58,10 @@
                 <p>The maximum quantity you can order is {{ maxQuantity }}.</p>
 
                 <!-- 
-					Handle events in Vue with v-on directive. The v-on:click 
-					directive attaches a click event handler/listener to an 
-					element.
-					'decreaseQuantity' method from Vue displayed in template.
-				-->
+		    Handle events in Vue with v-on directive. The v-on:click directive attaches a click event 
+		    handler/listener to an element.
+		    'decreaseQuantity' method from Vue displayed in template.
+		-->
                 <button v-on:click="decreaseQuantity" class="btn">-</button>
 
                 <!-- 'quantity' data & 'verifyQuantity' method of Vue -->
@@ -74,11 +69,10 @@
                 <input type="number" v-model.number="quantity" v-on:change="verifyQuantity">
 
                 <!-- 
-					Handle events in Vue with v-on directive. The v-on:click 
-					directive attaches a click event handler/listener to an 
-					element.
-					'increaseQuantity' method from Vue displayed in template.
-				-->
+		    Handle events in Vue with v-on directive. The v-on:click directive attaches a click event 
+		    handler/listener to an element.
+		    'increaseQuantity' method from Vue displayed in template.
+		-->
                 <button v-on:click="increaseQuantity" class="btn">+</button>
             </div>
 
@@ -87,10 +81,7 @@
             <p class="error" v-if="message">{{ message }}</p>
         </div>
 
-        <!-- 
-			Handle events in Vue with v-on directive. The v-on:click directive 
-			attaches a click event handler/listener to an element.
-		-->
+        <!-- Handle events in Vue with v-on directive. The v-on:click directive attaches a click event handler/listener to an element -->
         <button v-on:click="order" id="order">Order</button>
     </div> <!-- end of #app div -->
 
@@ -99,8 +90,7 @@
     <script>
         // this creates a Vue instance
         const app = Vue.createApp({
-            // data is the MODEL
-            // the data option for a component is a function & it returns an object.
+            // data is the MODEL: the data option for a component is a function & it returns an object.
             // ES6 shorthand for --> data: function() {
             data() {
                 return {
@@ -120,8 +110,7 @@
             },
             methods: {
                 // function definitions
-                // a function attached to an object is called a method
-                // function, method... almost exactly the same thing
+                // a function attached to an object is called a methodfunction, method... almost exactly the same thing
                 order() {
                     // display an alert with the order info
                     let orderInfo = `Thank you, you have ordered ${this.quantity} ${this.productName}`
@@ -141,10 +130,9 @@
                 },
                 increaseQuantity() {
                     this.message = "";
-
-                    // ToDO prevent quantity being increased above this.maxQuantity
                     let newQuantity = this.quantity + 1;
-
+		    
+		    // ToDO prevent quantity being increased above this.maxQuantity
                     if (newQuantity > this.maxQuantity) {
                         // not allowed
                         this.message = "Maximum quantity is: " + this.maxQuantity;
